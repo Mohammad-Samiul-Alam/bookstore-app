@@ -359,7 +359,154 @@ Located at `resources/views/book/book.blade.php`:
 @endsection
 
 ```
-Located at `resources/views/book/book.blade.php`:
+Located at `resources/views/book/book_add.blade.php`:
 ```blade
+@extends('layout.dashboard')
+@section('content')
+    <div class="container">
+        <h2 class="mt-4 f-20 mx-4 mb-2">New Book</h2>
+        <form method="POST" action="{{ route('book.store') }}">
+            @csrf
+            <div class="mx-4 mt-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" name="title" class="form-control" id="title">
+                @error('title')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="mx-4 mt-3">
+                <label for="author" class="form-label">Author</label>
+                <input type="text" name="author" class="form-control">
+                @error('author')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="mx-4 mt-3">
+                <label for="isbn" class="form-label">ISBN</label>
+                <input type="text" name="isbn" class="form-control" id="isbn">
+                @error('isbn')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="mx-4 mt-3">
+                <label for="stock" class="form-label">Stock</label>
+                <input type="number" name="stock" class="form-control" id="stock">
+                @error('stock')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="mx-4 mt-3">
+                <label for="price" class="form-label">Price</label>
+                <input type="number" step="0.01" name="price" class="form-control" id="price">
+                @error('price')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="mx-4 mt-4">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a href="{{ route('book') }}" class="btn btn-danger ms-2">Back</a>
+                {{-- <button type="button" class="btn btn-danger ms-2">Back</button> --}}
+            </div>
+        </form>
+    </div>
+    {{-- <div class="container">book add</div> --}}
+@endsection
+```
+Located at `resources/views/book/book_info.blade.php`:
+```blade
+@extends('layout.dashboard')
+@section('content')
+    <div class="mx-4">
+        <a href="{{ route('book', $book->id) }}" class="btn btn-secondary">Back</a>
+        <a href="{{ route('book.edit', $book->id) }}" class="btn btn-danger">Edit</a>
+    </div>
+    <div class="card mx-4 mt-4">
+        <div class="card-header">
+            <h5 class="pb-2 pt-2 display-6">Book Details</h5>
+        </div>
+        <div class="card-body">
+            <div class="row pb-2">
+                <div class="col-md-4"><strong>ID</strong></div>
+                <div class="col-md-8">{{ $book->id }}</div>
+            </div>
+            <hr>
+            <div class="row pb-2 pt-2">
+                <div class="col-md-4"><strong>Title</strong></div>
+                <div class="col-md-8">{{ $book->title }}</div>
+            </div>
+            <hr>
+            <div class="row pb-2 pt-2">
+                <div class="col-md-4"><strong>Author</strong></div>
+                <div class="col-md-8">{{ $book->author }}</div>
+            </div>
+            <hr>
+            <div class="row pb-2 pt-2">
+                <div class="col-md-4"><strong>ISBN</strong></div>
+                <div class="col-md-8">{{ $book->isbn }}</div>
+            </div>
+            <hr>
+            <div class="row pb-2 pt-2">
+                <div class="col-md-4"><strong>Price</strong></div>
+                <div class="col-md-8">{{ $book->price }}</div>
+            </div>
+            <hr>
+            <div class="row pt-2">
+                <div class="col-md-4"><strong>Stock</strong></div>
+                <div class="col-md-8">{{ $book->stock }}</div>
+            </div>
+        </div>
+    </div>
+@endsection
+```
+Located at `resources/views/book/book_edit.blade.php`:
+```blade
+@extends('layout.dashboard')
+@section('content')
+    <h2 class="mt-4 f-20 mx-4 mb-2">Edit Book</h2>
+    <form method="POST" action="{{ route('book.update') }}">
+        @csrf
+        <div class="mx-4 mt-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" name="title" class="form-control" value="{{ $book->title }}">
+            <input type="hidden" name="book_id" class="form-control" value="{{ $book->id }}">
+            @error('title')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+        <div class="mx-4 mt-3">
+            <label for="author" class="form-label">Author</label>
+            <input type="text" name="author" class="form-control" value="{{ $book->author }}">
+            @error('author')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+        <div class="mx-4 mt-3">
+            <label for="isbn" class="form-label">ISBN</label>
+            <input type="text" name="isbn" class="form-control" id="isbn" value="{{ $book->isbn }}">
+            @error('isbn')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+        <div class="mx-4 mt-3">
+            <label for="stock" class="form-label">Stock</label>
+            <input type="number" name="stock" class="form-control" id="stock" value="{{ $book->stock }}">
+            @error('stock')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+        <div class="mx-4 mt-3">
+            <label for="price" class="form-label">Price</label>
+            <input type="number" step="0.01" name="price" class="form-control" id="price"
+                value="{{ $book->price }}">
+            @error('price')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+        <div class="mx-4 mt-4">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="{{ route('book') }}" class="btn btn-danger ms-2">Back</a>
+        </div>
+    </form>
+@endsection
 ```
 ![image alt](https://github.com/Mohammad-Samiul-Alam/bookstore-app/blob/a01e69ad8f2c05e2a2b63cf3b81833214e9c6fcd/Screenshot_7.jpg)
