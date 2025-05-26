@@ -35,7 +35,7 @@ class Book extends Model
 
 ```
 ### Book Database
-Located at `database/migrations/2025_05_12_114522_create_books_table.php`:
+Located at `database/migrations/2025_05_23_011756_create_books_table.php`:
 ```php
 
 use Illuminate\Database\Migrations\Migration;
