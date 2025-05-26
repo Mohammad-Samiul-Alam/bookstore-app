@@ -10,4 +10,23 @@ https://github.com/user-attachments/assets/89eecca9-9e54-49c9-84ec-c3dc03c60bfd
 - Delete books
 - Responsive and clean Bootstrap 5 UI
 
+## Implementation Details
+
+### Book Model
+Located at `app/Models/Book.php`:
+```php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Book extends Model
+{
+    use HasFactory;
+    protected $guarded = ['id'];
+}
+
+```
+
 ![image alt](https://github.com/Mohammad-Samiul-Alam/bookstore-app/blob/a01e69ad8f2c05e2a2b63cf3b81833214e9c6fcd/Screenshot_7.jpg)
