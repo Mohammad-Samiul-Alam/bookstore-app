@@ -531,4 +531,21 @@ Located at `resources/views/book/book_edit.blade.php`:
     </form>
 @endsection
 ```
+## Project Structure
+- `app/Models/Book.php` - Book Eloquent model
+- `app/Http/Controllers/BookController.php` - Controller for book CRUD
+- `resources/views/books/` - Blade templates for book pages
+- `routes/web.php` - Web routes
+- `database/migrations/` - Database schema
+- `database/seeders/` - Seeders for sample data
+
+## License
+This project is open source and available under the [MIT License](LICENSE).
+### Prerequisites
+- laravel/framework >= v12.15.0
+- PHP >= 8.1
+- Composer
+- SQLite/MySQL/PostgreSQL (default: SQLite)
+- Node.js & npm (for frontend assets, optional)
+## Getting Started
 ![image alt](https://github.com/Mohammad-Samiul-Alam/bookstore-app/blob/a01e69ad8f2c05e2a2b63cf3b81833214e9c6fcd/Screenshot_7.jpg)
