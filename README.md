@@ -131,7 +131,7 @@ class BookController extends Controller
 }
 
 ```
-### Migration Example
+### Book Database
 Located at `database/migrations/2025_05_12_114522_create_books_table.php`:
 ```php
 
@@ -166,7 +166,7 @@ return new class extends Migration
     }
 };
 ```
-### Blade View Example
+### BookStore Blade View
 Located at `resources/views/layout/dashboard.blade.php`:
 ```blade
 <!DOCTYPE html>
