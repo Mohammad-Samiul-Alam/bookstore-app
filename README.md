@@ -183,7 +183,8 @@ class BookController extends Controller
 }
 
 ```
-### BookStore Blade View
+### BookStore Blade View:-
+### Dashboard Blade
 Located at `resources/views/layout/dashboard.blade.php`:
 ```blade
 <!DOCTYPE html>
@@ -301,6 +302,7 @@ Located at `resources/views/layout/dashboard.blade.php`:
     < /body>
 </html>
 ```
+### Book Blade
 Located at `resources/views/book/book.blade.php`:
 ```blade
 @extends('layout.dashboard')
@@ -376,6 +378,7 @@ Located at `resources/views/book/book.blade.php`:
 @endsection
 
 ```
+### Book Add Blade
 Located at `resources/views/book/book_add.blade.php`:
 ```blade
 @extends('layout.dashboard')
@@ -429,6 +432,7 @@ Located at `resources/views/book/book_add.blade.php`:
     {{-- <div class="container">book add</div> --}}
 @endsection
 ```
+### Book Information Blade
 Located at `resources/views/book/book_info.blade.php`:
 ```blade
 @extends('layout.dashboard')
@@ -475,6 +479,7 @@ Located at `resources/views/book/book_info.blade.php`:
     </div>
 @endsection
 ```
+### Book Edit Blade
 Located at `resources/views/book/book_edit.blade.php`:
 ```blade
 @extends('layout.dashboard')
