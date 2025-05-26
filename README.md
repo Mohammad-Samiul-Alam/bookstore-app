@@ -166,5 +166,200 @@ return new class extends Migration
     }
 };
 ```
+### Blade View Example
+Located at `resources/views/layout/dashboard.blade.php`:
+```blade
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <title>Bookstore</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-bottom: 50px;
+        }
+
+        .table td,
+        .table th {
+            vertical-align: middle;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .hidden.space-x-8.sm\:-my-px.sm\:ms-10.sm\:flex {
+            margin-left: 2px !important;
+        }
+
+        svg.w-5.h-5 {
+            width: 15px;
+        }
+
+        nav.flex.items-center.justify-between {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hidden.sm\:flex-1.sm\:flex.sm\:items-center.sm\:justify-between {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 0;
+            margin-left: 10px;
+        }
+
+        nav.flex.items-center.justify-between {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        span.relative.z-0.inline-flex.rtl\:flex-row-reverse.shadow-sm.rounded-md {
+            margin-left: 10px;
+        }
+
+        .btn-custom {
+            margin: 2px 0;
+        }
+
+        .flex.justify-between.flex-1.sm\:hidden {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .flex.justify-between.flex-1 span {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        span.relative.z-0.inline-flex.rtl\:flex-row-reverse.shadow-sm.rounded-md {
+            margin-left: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+
+
+        @media (max-width: 576px) {
+            .action-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 0.3rem;
+            }
+
+            nav.flex.items-center.justify-between {
+                overflow-x: scroll;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+
+    <!-- Header -->
+    <div class="bg-dark py-3 text-center text-white mb-4">
+        <h2 class="mb-0"><a href="{{ route('book') }}" class="text-white">Bookstore</a></h2>
+    </div>
+
+    <div class="container">
+        @yield('content')
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+    < /body>
+</html>
+```
+Located at `resources/views/book/book.blade.php`:
+```blade
+@extends('layout.dashboard')
+@section('content')
+    <!-- Search and New Book -->
+    <form method="GET" action="{{ route('book') }}">
+        <div class="row g-2 mb-3">
+            <div class="col-12 col-md-9">
+                <input type="text" name="title" class="form-control" placeholder="Search books">
+            </div>
+            <div class="col-6 col-md-1">
+                <button class="btn btn-primary w-100" type="submit">Search</button>
+            </div>
+            <div class="col-6 col-md-2">
+                <a href="{{ route('book.add') }}" class="btn btn-success w-100">New Book</a>
+            </div>
+        </div>
+    </form>
+
+    <!-- Table -->
+    <h2>
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+    </h2>
+    <div class="table-responsive shadow-sm bg-white rounded">
+        <table class="table align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>ISBN</th>
+                    <th>Author</th>
+                    <th>Stock</th>
+                    <th>Price (TK)</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($books as $sl => $book)
+                    <tr>
+                        <td>{{ $books->firstItem() + $sl }}</td>
+                        <td>{{ $book->title }}</td>
+                        <td>{{ $book->isbn }}</td>
+                        <td>{{ $book->author }}</td>
+                        <td>{{ $book->stock }}</td>
+                        <td>{{ $book->price }}</td>
+                        <td class="text-center">
+                            <a href="{{ route('book.info', $book->id) }}"
+                                class="btn btn-info btn-sm text-white btn-custom">Details</a>
+                            <a href="{{ route('book.edit', $book->id) }}"
+                                class="btn btn-warning btn-sm text-white btn-custom">Update</a>
+                            <a href="{{ route('book.delete', $book->id) }}"
+                                class="btn btn-danger btn-sm text-white btn-custom"
+                                onclick="return confirm('Are you sure you want to delete this book?');">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="row">
+        <div class="col-12">
+            {{ $books->links() }}
+        </div>
+    </div>
+@endsection
+
+```
+Located at `resources/views/book/book.blade.php`:
+```blade
+```
 ![image alt](https://github.com/Mohammad-Samiul-Alam/bookstore-app/blob/a01e69ad8f2c05e2a2b63cf3b81833214e9c6fcd/Screenshot_7.jpg)
